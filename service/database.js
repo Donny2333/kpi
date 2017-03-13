@@ -31,7 +31,6 @@ module.exports = function () {
 
         delete: function (tbl_name, where_condition, next) {
             var queryString = "delete from `" + tbl_name + "` where " + where_condition;
-            console.log(queryString);
             return client.query(queryString, next);
         },
 

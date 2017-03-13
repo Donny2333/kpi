@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+</head>
+<body ng-app="chatApp" ng-controller="AppController">
+<div class="chat">
+    <div class="board">
+        <div class="message" ng-repeat="message in vm.messages">
+            <h2>{{message.username}}</h2>
+            <p>{{message.content}}</p>
+        </div>
+    </div>
+    <div class="text">
+        <input type="text" ng-model="vm.text">
+        <input type="button" value="send" ng-click="send()">
+    </div>
+</div>
+</body>
+</html>
