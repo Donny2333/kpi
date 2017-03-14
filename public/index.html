@@ -2,24 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title></title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="/socket.io/socket.io.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
 </head>
-<body ng-app="chatApp" ng-controller="AppController">
-<div class="chat">
-    <div class="board">
-        <div class="message" ng-repeat="message in vm.messages">
-            <h2>{{message.username}}</h2>
-            <p>{{message.content}}</p>
-        </div>
-    </div>
-    <div class="text">
-        <input type="text" ng-model="vm.text">
-        <input type="button" value="send" ng-click="send()">
+<body ng-app="KPIApp">
+<div>
+    <div class="container">
+        <div ui-view></div>
     </div>
 </div>
 </body>

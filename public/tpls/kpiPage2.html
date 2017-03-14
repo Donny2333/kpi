@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input class="btn btn-default" ng-click="edit($index)" type="button" value="{{tab.name}}"
+               ng-repeat="tab in vm.tabs">
+        <button class="btn btn-default" ng-click="add()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>

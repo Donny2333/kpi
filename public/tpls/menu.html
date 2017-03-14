@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Title</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="menu in vm.menus" role="presentation" ng-class="{active: menu.select}">
+                <a ui-sref="{{menu.state}}" ng-click="select($index)">{{menu.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div ui-view></div>
+    </div>
+</div>

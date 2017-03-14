@@ -1,46 +1,78 @@
 /**
  * Created by Donny on 17/3/12.
  */
-app.factory('socket', function ($timeout) {
-    var service = {
-        connect: connect,
-        emit: emit,
-        on: on,
-        removeListener: removeListener,
-        socket: null
-    };
+(function () {
+    'use strict';
 
-    connect();
+    angular.module('KPIApp.services', [])
+        .factory('kpiService', function ($q, $http) {
+            return {
+                create: function (url, data) {
+                    var deferred = $q.defer();
 
-    return service;
+                    $http.post(url, data).then(function (response) {
+                        deferred.resolve(response.data);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
 
-    // Connect to Socket.io server
-    function connect() {
-        service.socket = io();
-    }
+                    return deferred.promise;
+                },
 
-    // Wrap the Socket.io 'emit' method
-    function emit(eventName, data) {
-        if (service.socket) {
-            service.socket.emit(eventName, data);
-        }
-    }
+                delete: function (url, id) {
+                    var deferred = $q.defer();
 
-    // Wrap the Socket.io 'on' method
-    function on(eventName, callback) {
-        if (service.socket) {
-            service.socket.on(eventName, function (data) {
-                $timeout(function () {
-                    callback(data);
-                });
-            });
-        }
-    }
+                    $http.delete(url + '/' + id).then(function (response) {
+                        deferred.resolve(response.data);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
 
-    // Wrap the Socket.io 'removeListener' method
-    function removeListener(eventName) {
-        if (service.socket) {
-            service.socket.removeListener(eventName);
-        }
-    }
-});
+                    return deferred.promise;
+                }
+            }
+        })
+        .factory('socket', function ($timeout) {
+            var service = {
+                connect: connect,
+                emit: emit,
+                on: on,
+                removeListener: removeListener,
+                socket: null
+            };
+
+            connect();
+
+            return service;
+
+            // Connect to Socket.io server
+            function connect() {
+                service.socket = io();
+            }
+
+            // Wrap the Socket.io 'emit' method
+            function emit(eventName, data) {
+                if (service.socket) {
+                    service.socket.emit(eventName, data);
+                }
+            }
+
+            // Wrap the Socket.io 'on' method
+            function on(eventName, callback) {
+                if (service.socket) {
+                    service.socket.on(eventName, function (data) {
+                        $timeout(function () {
+                            callback(data);
+                        });
+                    });
+                }
+            }
+
+            // Wrap the Socket.io 'removeListener' method
+            function removeListener(eventName) {
+                if (service.socket) {
+                    service.socket.removeListener(eventName);
+                }
+            }
+        });
+}());
