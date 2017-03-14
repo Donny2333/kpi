@@ -11,7 +11,7 @@
                     var deferred = $q.defer();
 
                     $http.post(url, data).then(function (response) {
-                        deferred.resolve(response.data);
+                        deferred.resolve(response);
                     }, function (err) {
                         deferred.reject(err);
                     });
@@ -23,7 +23,7 @@
                     var deferred = $q.defer();
 
                     $http.delete(url + '/' + id).then(function (response) {
-                        deferred.resolve(response.data);
+                        deferred.resolve(response);
                     }, function (err) {
                         deferred.reject(err);
                     });

@@ -32,15 +32,17 @@
             $scope.select(0);
         })
 
-        .controller('KpiController', function (kpiService, $scope) {
+        .controller('KpiController1', function (kpiService, $scope) {
             var date = new Date();
             var dateTime = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
             var vm = $scope.vm = {
                 newPage: {
                     id: '2',
-                    title: '新建模版',
-                    content: '<span>这里是测试模版内容</span>',
-                    edit: '<span>这里是测试模版内容</span>',
+                    name: '新建项目',
+                    dataSource: 'example.com',
+                    height: '300px',
+                    width: '100%',
+                    containerID: '2',
                     show: 'Y',
                     index: '1',
                     createDate: dateTime,
@@ -53,11 +55,11 @@
             };
 
             $scope.create = function () {
-                kpiService.create('/api/kpiPages', {page: vm.newPage});
+                kpiService.create('/api/kpi1tems', {item: vm.newPage});
             };
 
             $scope.delete = function () {
-                kpiService.delete('/api/kpiPages', vm.newPage.id);
+                kpiService.delete('/api/kpi1tems', vm.newPage.id);
             }
         })
 

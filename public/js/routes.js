@@ -18,7 +18,7 @@
                 .state('app.kpiPage1', {
                     url: '/kpiPage1',
                     templateUrl: '../tpls/kpiPage1.html',
-                    controller: 'KpiController'
+                    controller: 'KpiController1'
                 })
                 .state('app.kpiPage2', {
                     url: '/kpiPage2',

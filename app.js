@@ -6,9 +6,13 @@ var ejs = require('ejs');
 var path = require('path');
 var bodyParser = require("body-parser");
 var kpiPages = require('./controller/kpiPages');
+var kpiContainers = require('./controller/kpiContainers');
+var kpi1tems = require('./controller/kpi1tems');
 
 var app = express();
-var kpi = kpiPages();
+var pages = kpiPages();
+var containers = kpiContainers();
+var items = kpi1tems();
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -20,9 +24,17 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/kpiPages', kpi.list)
-    .post('/api/kpiPages', kpi.insert)
-    .delete('/api/kpiPages/:id', kpi.delete);
+app.get('/api/kpiPages', pages.list)
+    .post('/api/kpiPages', pages.insert)
+    .delete('/api/kpiPages/:id', pages.delete);
+
+app.get('/api/kpiContainers', containers.list)
+    .post('/api/kpiContainers', containers.insert)
+    .delete('/api/kpiContainers/:id', containers.delete);
+
+app.get('/api/kpi1tems', items.list)
+    .post('/api/kpi1tems', items.insert)
+    .delete('/api/kpi1tems/:id', items.delete);
 
 // io.on('connection', function (socket) {
 //     console.log('a user connected');

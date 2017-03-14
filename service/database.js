@@ -25,12 +25,12 @@ module.exports = function () {
         },
 
         insert: function (tbl_name, partition_name, expr, next) {
-            var queryString = "insert `" + tbl_name + "` " + partition_name + ' values ' + expr;
+            var queryString = "insert " + tbl_name + " " + partition_name + ' values ' + expr;
             return client.query(queryString, next);
         },
 
         delete: function (tbl_name, where_condition, next) {
-            var queryString = "delete from `" + tbl_name + "` where " + where_condition;
+            var queryString = "delete from " + tbl_name + " where " + where_condition;
             return client.query(queryString, next);
         },
 
