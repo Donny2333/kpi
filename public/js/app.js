@@ -80,11 +80,7 @@
             };
 
             $scope.add = function () {
-                var id = vm.tabs.length;
-                vm.tabs.push({
-                    id: id,
-                    name: 'tab' + id
-                })
+                $state.go('app.kpiPage1');
             }
         })
 

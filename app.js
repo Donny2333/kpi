@@ -5,10 +5,9 @@ var express = require('express');
 var ejs = require('ejs');
 var path = require('path');
 var bodyParser = require("body-parser");
-var kpiPages = require('./controller/kpiPages');
+var kpiPages = require('./routes/kpiPages');
 
 var app = express();
-var pages = kpiPages();
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -20,12 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/kpiPages', pages.list)
-    .post('/api/kpiPages', pages.insertOrUpdate);
-
-app.get('/api/kpiPages/:id', pages.getOne)
-    .post('/api/kpiPages/:id', pages.insertOrUpdate)
-    .delete('/api/kpiPages/:id', pages.delete);
+app.use('/api/kpiPages', kpiPages);
 
 // io.on('connection', function (socket) {
 //     console.log('a user connected');
