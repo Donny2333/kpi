@@ -7,7 +7,23 @@
     angular.module('KPIApp.services', [])
         .factory('kpiService', function ($q, $http) {
             return {
-                create: function (url, data) {
+                get: function (url, id) {
+                    var deferred = $q.defer();
+
+                    if (id) {
+                        url += '/' + id;
+                    }
+                    console.log(url);
+                    $http.get(url).then(function (response) {
+                        deferred.resolve(response);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
+
+                    return deferred.promise;
+                },
+
+                post: function (url, data) {
                     var deferred = $q.defer();
 
                     $http.post(url, data).then(function (response) {
@@ -22,7 +38,12 @@
                 delete: function (url, id) {
                     var deferred = $q.defer();
 
-                    $http.delete(url + '/' + id).then(function (response) {
+                    if (id !== undefined && id !== null) {
+                        url += '/' + id;
+                    }
+
+                    console.log(id);
+                    $http.delete(url).then(function (response) {
                         deferred.resolve(response);
                     }, function (err) {
                         deferred.reject(err);

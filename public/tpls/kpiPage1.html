@@ -3,12 +3,16 @@
         <form>
             <div class="form-group">
                 <label for="InputID">ID</label>
-                <input type="text" class="form-control" id="InputID" placeholder="ID" ng-model="vm.newPage.id">
+                <input type="text" class="form-control" id="InputID" placeholder="ID" ng-model="vm.newPage.ID">
             </div>
             <div class="form-group">
                 <label for="InputTitle">Title</label>
-                <input type="text" class="form-control" id="InputTitle" placeholder="Title"
-                       ng-model="vm.newPage.title">
+                <input type="text" class="form-control" id="InputTitle" placeholder="ID" ng-model="vm.newPage.TITLE">
+            </div>
+            <div class="form-group">
+                <label for="InputContent">Content</label>
+                <input type="text" class="form-control" id="InputContent" placeholder="Title"
+                       ng-model="vm.newPage.CONTENT">
             </div>
             <button type="submit" class="btn btn-default" ng-click="create()">create</button>
             <button type="submit" class="btn btn-default" ng-click="delete()">delete</button>

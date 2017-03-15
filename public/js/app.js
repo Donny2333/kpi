@@ -29,7 +29,6 @@
                 vm.menus[index].select = true;
             };
 
-            $scope.select(0);
         })
 
         .controller('KpiController1', function (kpiService, $scope) {
@@ -37,47 +36,42 @@
             var dateTime = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
             var vm = $scope.vm = {
                 newPage: {
-                    id: '2',
-                    name: '新建项目',
-                    dataSource: 'example.com',
-                    height: '300px',
-                    width: '100%',
-                    containerID: '2',
-                    show: 'Y',
-                    index: '1',
-                    createDate: dateTime,
-                    createBy: 'admin',
-                    createName: '管理员',
-                    updateDate: dateTime,
-                    updateBy: 'admin',
-                    updateName: '管理员'
+                    ID: 6,
+                    TITLE: '这里是测试页面',
+                    CONTENT: '这里是测试页面内容',
+                    IS_SHOW: 'Y',
+                    SHOW_INDEX: 3,
+                    CREATE_BY: 'admin',
+                    CREATE_NAME: '管理员',
+                    UPDATE_BY: 'admin',
+                    UPDATE_NAME: '管理员'
                 }
             };
 
+            $scope.select(0);
+
             $scope.create = function () {
-                kpiService.create('/api/kpi1tems', {item: vm.newPage});
+                kpiService.post('/api/kpiPages', {page: vm.newPage});
             };
 
             $scope.delete = function () {
-                kpiService.delete('/api/kpi1tems', vm.newPage.id);
+                kpiService.delete('/api/kpiPages', vm.newPage.ID);
             }
         })
 
         .controller('KpiController2', function (kpiService, $scope, $state) {
             var vm = $scope.vm = {
-                tabs: [{
-                    id: 0,
-                    name: 'tab0'
-                }, {
-                    id: 1,
-                    name: 'tab1'
-                }, {
-                    id: 2,
-                    name: 'tab2'
-                }]
+                tabs: []
             };
 
             $scope.select(1);
+
+            kpiService.get('/api/kpiPages').then(function (res) {
+                res.data.map(function (tab) {
+                    vm.tabs.push(tab);
+                });
+                console.log(res.data);
+            });
 
             $scope.edit = function (id) {
                 $state.go('app.kpiPage3', {
@@ -95,7 +89,24 @@
         })
 
         .controller('KpiController3', function (kpiService, $scope, $stateParams) {
-            console.log($stateParams);
+            var date = new Date();
+            var dateTime = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+            var vm = $scope.vm = {
+                newPage: {}
+            };
+
             $scope.select(2);
+
+            $scope.create = function () {
+                kpiService.post('/api/kpiPages', {page: vm.newPage});
+            };
+
+            $scope.delete = function () {
+                kpiService.delete('/api/kpiPages', vm.newPage.ID);
+            };
+
+            kpiService.get('/api/kpiPages', $stateParams.id).then(function (res) {
+                vm.newPage = res.data;
+            })
         });
 }());

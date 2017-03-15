@@ -21,10 +21,11 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/kpiPages', pages.list)
-    .post('/api/kpiPages', pages.insertOrUpdate)
-    .delete('/api/kpiPages/:id', pages.delete);
+    .post('/api/kpiPages', pages.insertOrUpdate);
 
-app.post('/api/kpiPages/savePage', pages.set);
+app.get('/api/kpiPages/:id', pages.getOne)
+    .post('/api/kpiPages/:id', pages.insertOrUpdate)
+    .delete('/api/kpiPages/:id', pages.delete);
 
 // io.on('connection', function (socket) {
 //     console.log('a user connected');

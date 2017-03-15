@@ -18,35 +18,50 @@ module.exports = function () {
         var page = req.body.page;
         KpiPages.findOne({
             where: {
-                ID: page.id
+                ID: page.ID
             }
-        }).then(function (obj) {
-            if (obj) { // update
-                return obj.update(page);
+        }).then(function (kpi) {
+            if (kpi) { // update
+                kpi.update(page).then(function (message) {
+                    res.json(message);
+                }, function (err) {
+                    res.json(err)
+                });
             }
             else { // insert
-                return KpiPages.create(page);
+                KpiPages.create(page).then(function (message) {
+                    res.json(message);
+                }, function (err) {
+                    res.json(err)
+                });
             }
         })
     };
 
     kpiPages.delete = function (req, res) {
-        var id = req.body.id;
+        var id = req.params.id;
         KpiPages.destroy({
             where: {
                 ID: id
             }
+        }).then(function (message) {
+            res.json(message);
+        }, function (err) {
+            res.json(err)
         });
     };
 
     // 读取数据库传给前端json页面
-    kpiPages.get = function (req, res) {
+    kpiPages.getOne = function (req, res) {
+        var id = req.params.id;
 
-    };
-
-    // 接受前端传来的json页面存储到数据库
-    kpiPages.set = function (req, res) {
-
+        KpiPages.findOne({
+            where: {
+                ID: id
+            }
+        }).then(function (page) {
+            res.json(page);
+        })
     };
 
     return kpiPages;
