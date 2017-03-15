@@ -6,13 +6,9 @@ var ejs = require('ejs');
 var path = require('path');
 var bodyParser = require("body-parser");
 var kpiPages = require('./controller/kpiPages');
-var kpiContainers = require('./controller/kpiContainers');
-var kpi1tems = require('./controller/kpi1tems');
 
 var app = express();
 var pages = kpiPages();
-var containers = kpiContainers();
-var items = kpi1tems();
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -25,18 +21,10 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/kpiPages', pages.list)
-    .post('/api/kpiPages', pages.insert)
+    .post('/api/kpiPages', pages.insertOrUpdate)
     .delete('/api/kpiPages/:id', pages.delete);
 
-app.get('/api/kpiContainers', containers.list)
-    .post('/api/kpiContainers', containers.insert)
-    .delete('/api/kpiContainers/:id', containers.delete);
-
-app.get('/api/kpi1tems', items.list)
-    .post('/api/kpi1tems', items.insert)
-    .delete('/api/kpi1tems/:id', items.delete);
-
-app.post('/api/kpiPages/savePage', pages.findByID);
+app.post('/api/kpiPages/savePage', pages.set);
 
 // io.on('connection', function (socket) {
 //     console.log('a user connected');

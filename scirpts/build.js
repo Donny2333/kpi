@@ -16,18 +16,18 @@ var KpiPages = require('../models/kpiPages');
 //         UPDATE_BY: 'admin',
 //         UPDATE_NAME: '管理员'
 //     }).then(function () {
-KpiPages.sync({force: false}).then(function () {
-    KpiPages.create({
-        TITLE: '这里是测试页面',
-        CONTENT: '这里是测试页面内容',
-        IS_SHOW: 'Y',
-        SHOW_INDEX: 3,
-        CREATE_BY: 'admin',
-        CREATE_NAME: '管理员',
-        UPDATE_BY: 'admin',
-        UPDATE_NAME: '管理员'
-    })
-});
+// KpiPages.sync({force: false}).then(function () {
+//     KpiPages.create({
+//         TITLE: '这里是测试页面',
+//         CONTENT: '这里是测试页面内容',
+//         IS_SHOW: 'Y',
+//         SHOW_INDEX: 3,
+//         CREATE_BY: 'admin',
+//         CREATE_NAME: '管理员',
+//         UPDATE_BY: 'admin',
+//         UPDATE_NAME: '管理员'
+//     })
+// });
 // })
 // });
 
