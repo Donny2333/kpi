@@ -10,32 +10,32 @@ module.exports = function () {
         port: '3306',
         user: 'root',
         password: 'admin',
-        database: 'kpi'
+        database: 'test_kpi'
     };
 
     return {
         connect: function () {
             client = mysql.createConnection(connectString);
-            return client.connect();
+            client.connect();
         },
 
         query: function (select_expr, table_references, next) {
             var queryString = "select " + select_expr + " from " + table_references;
-            return client.query(queryString, next);
+            client.query(queryString, next);
         },
 
         insert: function (tbl_name, partition_name, expr, next) {
             var queryString = "insert " + tbl_name + " " + partition_name + ' values ' + expr;
-            return client.query(queryString, next);
+            client.query(queryString, next);
         },
 
         delete: function (tbl_name, where_condition, next) {
             var queryString = "delete from " + tbl_name + " where " + where_condition;
-            return client.query(queryString, next);
+            client.query(queryString, next);
         },
 
         disconnect: function () {
-            return client.end();
+            client.end();
         }
     };
 };

@@ -2,6 +2,7 @@
  * Created by Donny on 17/3/14.
  */
 var database = require('./../service/database');
+var log = require('./log');
 var util = require('util');
 
 var db = database();
@@ -9,6 +10,7 @@ var db = database();
 db.connect();
 
 module.exports = function () {
+
     var kpiContainers = {};
 
     const TABLE_NAME = 't_kpi_containers';
@@ -29,7 +31,7 @@ module.exports = function () {
 
         db.insert(TABLE_NAME, partition_name, expr, function (err, results, fields) {
             if (err) {
-                throw err;
+                log.error(req, res, err);
             }
 
             if (results) {
@@ -44,7 +46,7 @@ module.exports = function () {
                 }
             }
 
-            return res.json(_result);
+            res.json(_result);
         });
 
     };

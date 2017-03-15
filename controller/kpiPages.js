@@ -2,6 +2,7 @@
  * Created by Donny on 17/2/28.
  */
 var database = require('./../service/database');
+var log = require('./log');
 var util = require('util');
 
 var db = database();
@@ -18,7 +19,7 @@ module.exports = function () {
 
         db.query('*', TABLE_NAME, function (err, results, fields) {
             if (err) {
-                throw err;
+                log.error(req, res, err);
             }
 
             if (results) {
@@ -30,7 +31,7 @@ module.exports = function () {
                     });
                 }
 
-                return res.json(_result);
+                res.json(_result);
             }
         });
     };
@@ -47,7 +48,7 @@ module.exports = function () {
 
         db.insert(TABLE_NAME, partition_name, expr, function (err, results, fields) {
             if (err) {
-                throw err;
+                log.error(req, res, err);
             }
 
             if (results) {
@@ -60,7 +61,7 @@ module.exports = function () {
                 }
             }
 
-            return res.json(_result);
+            res.json(_result);
         });
     };
 
@@ -71,7 +72,7 @@ module.exports = function () {
 
         db.delete(TABLE_NAME, where_condition, function (err, results, fields) {
             if (err) {
-                throw err;
+                log.error(req, res, err);
             }
 
             if (results) {
@@ -84,7 +85,7 @@ module.exports = function () {
                 }
             }
 
-            return res.json(_result);
+            res.json(_result);
         })
     };
 
