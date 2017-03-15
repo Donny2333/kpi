@@ -55,5 +55,29 @@ module.exports = function () {
 
     };
 
+    kpi1tems.findByContainerID = function (CtID) {
+
+        var _result = [];
+
+        db.query('*', TABLE_NAME, "CONTAINER_ID in ('" + CtID + "')", function (err, results, fields) {
+            if (results) {
+                for (var i = 0; i < results.length; i++) {
+                    if (_result[i].IS_SHOW) {
+                        _result.push({
+                            id: results[i].ID,
+                            index: results[i].SHOW_INDEX,
+                            name: results[i].NAME,
+                            height: results[i].HEIGHT,
+                            width: results[i].WIDTH,
+                            dataSource: results[i].DATA_SOURCE,
+                        });
+                    }
+                }
+            }
+        });
+
+        return _result;
+    };
+
     return kpi1tems;
 };

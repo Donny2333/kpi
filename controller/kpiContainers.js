@@ -55,6 +55,28 @@ module.exports = function () {
 
     };
 
+    kpiContainers.findByPageID = function (pageID) {
+
+        var _result = [];
+
+        db.query('*', TABLE_NAME, "PAGE_ID in ('" + pageID + "')", function (err, results, fields) {
+            if (results) {
+                for (var i = 0; i < results.length; i++) {
+                    if (_result[i].IS_SHOW) {
+                        _result.push({
+                            id: results[i].ID,
+                            index: results[i].SHOW_INDEX,
+                            title: results[i].TITLE,
+                            height: results[i].HEIGHT,
+                            width: results[i].WIDTH
+                        });
+                    }
+                }
+            }
+        });
+
+        return _result;
+    };
 
     return kpiContainers;
 };

@@ -36,6 +36,8 @@ app.get('/api/kpi1tems', items.list)
     .post('/api/kpi1tems', items.insert)
     .delete('/api/kpi1tems/:id', items.delete);
 
+app.post('/api/kpiPages/savePage', pages.findByID);
+
 // io.on('connection', function (socket) {
 //     console.log('a user connected');
 //

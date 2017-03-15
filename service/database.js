@@ -19,8 +19,11 @@ module.exports = function () {
             client.connect();
         },
 
-        query: function (select_expr, table_references, next) {
+        query: function (select_expr, table_references, where_condition, next) {
             var queryString = "select " + select_expr + " from " + table_references;
+            if (where_condition.length > 0) {
+                queryString += " where " + where_condition;
+            }
             client.query(queryString, next);
         },
 
