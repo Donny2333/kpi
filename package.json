@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "supervisor app.js"
+    "start": "gulp"
   },
   "author": "Donny",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
-    "supervisor": "^0.12.0"
+    "browser-sync": "^2.18.8",
+    "gulp-nodemon": "^2.2.1"
   }
 }

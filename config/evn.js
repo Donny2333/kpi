@@ -7,7 +7,7 @@ var sequelize = new Sequelize('test_kpi', 'root', 'admin', {
     host: '192.168.99.253',
     dialect: 'mysql',
     define: {
-        timestamps: false // true by default
+        timestamps: false
     }
 });
 
