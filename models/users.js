@@ -2,7 +2,7 @@
  * Created by Donny on 17/3/15.
  */
 var Sequelize = require('sequelize');
-var sequelize = require('../config/evn');
+var sequelize = require('../config/lib/sequelize');
 
 var Users = sequelize.define('t_s_users', {
     ID: {

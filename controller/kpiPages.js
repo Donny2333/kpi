@@ -2,7 +2,7 @@
  * Created by Donny on 17/2/28.
  */
 var KpiPages = require('../models/kpiPages');
-var log = require('./log');
+var log = require('../config/lib/log');
 
 module.exports = function () {
 
