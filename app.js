@@ -20,6 +20,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/kpiPages', kpiPages);
+app.get('/kpiPages', function (req, res) {
+    res.sendfile('./views/index.html');
+});
 
 // io.on('connection', function (socket) {
 //     console.log('a user connected');

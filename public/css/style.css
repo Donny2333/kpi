@@ -1,4 +1,39 @@
+/* Global */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, body > [ui-view] {
+    height: 100%;
+}
+
 /* menu.html */
 .menu {
-    list-style: none;
+    height: 100%;
+    color: #a7b1c2;
+    background: #2f4050;
+}
+
+.menu ul {
+    list-style: none
+}
+
+.menu ul > li {
+    margin: 5px 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tabs {
+    height: 100%;
+}
+
+.tabs > [ui-view] {
+    height: 95%;
+}
+
+/* pages.html */
+.panel {
+    height: 100%;
 }

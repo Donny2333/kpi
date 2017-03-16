@@ -6,29 +6,34 @@
 
     angular.module('KPIApp.routes', ['ui.router'])
         .config(function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/app/kpiPage1');
+            $urlRouterProvider.otherwise('/kpi/home');
 
             $stateProvider
-                .state('app', {
-                    url: '/app',
+                .state('kpi', {
+                    url: '/kpi',
                     abstract: true,
                     templateUrl: '../tpls/menu.html',
                     controller: 'AppController'
                 })
-                .state('app.kpiPage1', {
-                    url: '/kpiPage1',
-                    templateUrl: '../tpls/kpiPage1.html',
-                    controller: 'KpiController1'
+                .state('kpi.home', {
+                    url: '/home',
+                    templateUrl: '../tpls/home.html',
+                    controller: 'HomeController'
                 })
-                .state('app.kpiPage2', {
-                    url: '/kpiPage2',
-                    templateUrl: '../tpls/kpiPage2.html',
-                    controller: 'KpiController2'
+                .state('kpi.pages', {
+                    url: '/pages',
+                    templateUrl: '../tpls/pages.html',
+                    controller: 'PageController'
                 })
-                .state('app.kpiPage3', {
-                    url: '/kpiPage3',
-                    templateUrl: '../tpls/kpiPage3.html',
-                    controller: 'KpiController3',
+                .state('kpi.users', {
+                    url: '/users',
+                    templateUrl: '../tpls/users.html',
+                    controller: 'userController'
+                })
+                .state('kpi.rights', {
+                    url: '/rights',
+                    templateUrl: '../tpls/rights.html',
+                    controller: 'rightController',
                     params: {
                         id: null
                     }

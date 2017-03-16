@@ -7,7 +7,7 @@ var nodemon = require('gulp-nodemon');
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
-var BROWSER_SYNC_RELOAD_DELAY = 500;
+var BROWSER_SYNC_RELOAD_DELAY = 800;
 
 gulp.task('nodemon', function (cb) {
     var called = false;
@@ -49,6 +49,15 @@ gulp.task('js', function () {
     //.pipe(uglify())
     //.pipe(gulp.dest('...'));
 });
+
+gulp.task('bs-reload', function () {
+    browserSync.reload();
+});
+
+gulp.task('css', function () {
+    return gulp.src('public/**/*.css')
+        .pipe(browserSync.reload({stream: true}));
+})
 
 gulp.task('default', ['browser-sync'], function () {
     gulp.watch('public/**/*.js', ['js', browserSync.reload]);

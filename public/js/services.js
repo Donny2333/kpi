@@ -13,7 +13,6 @@
                     if (id) {
                         url += '/' + id;
                     }
-                    console.log(url);
                     $http.get(url).then(function (response) {
                         deferred.resolve(response);
                     }, function (err) {

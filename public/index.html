@@ -8,16 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/directives.js"></script>
     <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
 </head>
 <body ng-app="KPIApp">
-<div>
-    <div class="container">
-        <div ui-view></div>
-    </div>
-</div>
+<div ui-view></div>
 </body>
 </html>

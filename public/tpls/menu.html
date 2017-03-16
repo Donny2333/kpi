@@ -1,18 +1,22 @@
-<div class="row">
-    <div class="col-md-12">
-        <h2>Title</h2>
-    </div>
-</div>
+<div class="col-md-2 menu">
+    <h2>KPI管理系统</h2>
 
-<div class="row">
-    <div class="col-md-2">
-        <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="menu in vm.menus" role="presentation" ng-class="{active: menu.select}">
-                <a ui-sref="{{menu.state}}" ng-click="select($index)">{{menu.name}}</a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-md-10">
-        <div ui-view></div>
-    </div>
+    <ul>
+        <li ng-repeat="menu in vm.menus" ng-click="open(menu)">
+            {{menu.name}}
+        </li>
+    </ul>
+</div>
+<div class="col-md-10 tabs">
+    <ul class="nav nav-tabs">
+        <li ng-repeat="tab in vm.tabs" ng-class="{active: tab.select}" role="presentation">
+            <a ng-click="select($index)">
+                {{tab.name}}
+                <i ng-if="tab.id > 0" ng-click="close($index, $event)"
+                   class="glyphicon glyphicon-remove"
+                   aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+    <div ui-view></div>
 </div>
