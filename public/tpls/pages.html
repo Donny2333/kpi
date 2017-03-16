@@ -1,57 +1,33 @@
 <div class="panel panel-default">
     <div class="panel-body">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">操作</a>
-                </div>
-                <div class="collapse navbar-collapse modal-demo">
-                    <a ng-click="open()" type="button" class="btn btn-default navbar-btn">添加</a>
-                    <a type="button" class="btn btn-default navbar-btn">删除</a>
-                    <a type="button" class="btn btn-default navbar-btn">修改</a>
-                </div>
-            </div>
-        </nav>
-        <table class="table table-hover table-bordered">
-            <thead>
-            <tr>
-                <th><input type="checkbox"></th>
-                <th>#</th>
-                <th>标题</th>
-                <th>是否显示</th>
-                <th>排序</th>
-                <th>创建时间</th>
-                <th>创建人</th>
-                <th>修改时间</th>
-                <th>修改人</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="page in vm.pages">
-                <th><input type="checkbox"></th>
-                <th>{{page.ID}}</th>
-                <td>{{page.TITLE}}</td>
-                <td>{{page.IS_SHOW}}</td>
-                <td>{{page.SHOW_INDEX}}</td>
-                <td>{{page.CREATE_DATE}}</td>
-                <td>{{page.CREATE_NAME}}</td>
-                <td>{{page.UPDATE_DATE}}</td>
-                <td>{{page.UPDATE_NAME}}</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="collapse navbar-collapse modal-demo" style="padding: 0;">
+            <a ng-click="open()" type="button" class="btn btn-default navbar-btn" ng-class="{disabled: vm.checked!=0}">添加</a>
+            <a type="button" class="btn btn-default navbar-btn" ng-class="{disabled: vm.checked==0}">删除</a>
+            <a type="button" class="btn btn-default navbar-btn" ng-class="{disabled: vm.checked!=1}">修改</a>
+        </div>
+        <div style="height:300px;overflow: auto">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" ng-click="checkAll()"></th>
+                    <th ng-repeat="th in vm.table.th">{{th}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="page in vm.pages" ng-click="check(page)">
+                    <td><input type="checkbox" ng-model="page.checked"></td>
+                    <td ng-repeat="td in vm.table.td">{{page[td]}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title" id="modal-title">新页面</h3>
         </div>
         <div class="modal-body" id="modal-body">
-            <ul>
-                <li ng-repeat="item in $ctrl.items">
-                    <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ $ctrl.selected.item }}</b>
+            <p>页面信息</p>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>

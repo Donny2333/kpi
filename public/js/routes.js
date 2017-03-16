@@ -28,15 +28,12 @@
                 .state('kpi.users', {
                     url: '/users',
                     templateUrl: '../tpls/users.html',
-                    controller: 'userController'
+                    controller: 'UserController'
                 })
                 .state('kpi.rights', {
                     url: '/rights',
                     templateUrl: '../tpls/rights.html',
-                    controller: 'rightController',
-                    params: {
-                        id: null
-                    }
+                    controller: 'RightController'
                 });
         });
 }());
