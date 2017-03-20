@@ -11,6 +11,6 @@ router.get('/', pages.list)
     .post('/', pages.insertOrUpdate);
 
 router.get('/:id', pages.getOne)
-    .delete('/:id', pages.delete);
+    .post('/delete', pages.delete);
 
 module.exports = router;

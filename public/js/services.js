@@ -32,23 +32,6 @@
                     });
 
                     return deferred.promise;
-                },
-
-                delete: function (url, id) {
-                    var deferred = $q.defer();
-
-                    if (id !== undefined && id !== null) {
-                        url += '/' + id;
-                    }
-
-                    console.log(id);
-                    $http.delete(url).then(function (response) {
-                        deferred.resolve(response);
-                    }, function (err) {
-                        deferred.reject(err);
-                    });
-
-                    return deferred.promise;
                 }
             }
         })
@@ -94,5 +77,22 @@
                     service.socket.removeListener(eventName);
                 }
             }
-        });
+        })
+        .factory('uuid', function () {
+            var uuid = {};
+
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+
+            uuid.create = function () {
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
+            };
+
+            return uuid;
+        })
+
 }());

@@ -18,6 +18,7 @@ module.exports = function () {
     // 根据指定ID创建或更新页面
     kpiPages.insertOrUpdate = function (req, res) {
         var page = req.body.page;
+
         KpiPages.findOne({
             where: {
                 ID: page.ID
@@ -37,15 +38,17 @@ module.exports = function () {
                     res.json(err)
                 });
             }
-        })
+        });
     };
 
     // 删除指定ID的页面
     kpiPages.delete = function (req, res) {
-        var id = req.params.id;
+        var ids = req.body.ids;
         KpiPages.destroy({
             where: {
-                ID: id
+                ID: {
+                    $in: ids
+                }
             }
         }).then(function (message) {
             res.json(message);
