@@ -17,6 +17,7 @@
   "dependencies": {
     "angular": "^1.5.11",
     "angular-bootstrap": "^2.5.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "bootstrap-table": "^1.11.1"
   }
 }

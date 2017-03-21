@@ -5,58 +5,34 @@
     'use strict';
 
     angular.module('KPIApp.controllers')
-        .controller('PageController', function (kpiService, $scope, $uibModal, $log, $timeout) {
+        .controller('PageController', function (kpiService, $scope, $uibModal, $log, uuid) {
+            var host = 'http://192.168.99.240:3010/';
             var vm = $scope.vm = {
-                checkAll: false,
-                checked: 0,
-                pages: [],
                 table: {
-                    th: ['标题', '是否显示', '排序', '创建时间', '创建人', '修改时间', '修改人'],
+                    th: ['标题', '显示', '排序', '创建时间', '创建人', '修改时间', '修改人'],
                     td: ['TITLE', 'IS_SHOW', 'SHOW_INDEX', 'CREATE_DATE', 'CREATE_NAME', 'UPDATE_DATE', 'UPDATE_NAME']
                 },
-                newPage: {
+                checked: 0
+            };
+
+            var create = function () {
+                $scope.open();
+            };
+
+            var edit = function () {
+                var selects = $('#tb_pages').bootstrapTable('getSelections');
+                $scope.open(selects[0]);
+            };
+
+            $scope.open = function (select) {
+                var newPage = {
                     TITLE: '',
                     SHOW_INDEX: 1,
                     IS_SHOW: 'Y'
-                }
-            };
+                };
 
-            $scope.check = function (page) {
-                if (page.checked) {
-                    vm.checked--;
-                } else {
-                    vm.checked++;
-                }
-
-                page.checked = !page.checked;
-
-                vm.checkAll = _.isEqual(vm.pages.length, _.countBy(vm.pages, 'checked')['true']);
-            };
-
-            $scope.checkAll = function () {
-                vm.pages.map(function (page) {
-                    page.checked = vm.checkAll;
-                });
-                vm.checked = vm.checkAll ? vm.pages.length : 0;
-            };
-
-            var uuid = {};
-
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-
-            uuid.create = function () {
-                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                    s4() + '-' + s4() + s4() + s4();
-            };
-
-            $scope.open = function () {
-                var newPage = vm.newPage;
-                if (vm.checked == 1) {
-                    newPage = _.find(vm.pages, 'checked');
+                if (select) {
+                    newPage = select;
                 }
 
                 var modalInstance = $uibModal.open({
@@ -70,30 +46,21 @@
                 });
 
                 modalInstance.result.then(function (newPage) {
-                    kpiService.post('http://localhost:3010/api/kpiPages', {
+                    kpiService.post(host + 'api/kpiPages', {
                         page: {
                             ID: newPage.ID || uuid.create().toString(),
                             TITLE: newPage.TITLE,
                             IS_SHOW: newPage.IS_SHOW,
                             SHOW_INDEX: newPage.SHOW_INDEX,
-                            CREATE_DATE: new Date().toDateString(),
+                            CREATE_DATE: new Date(),
                             CREATE_BY: 'admin',
                             CREATE_NAME: '管理员',
-                            UPDATE_DATE: new Date().toDateString(),
+                            UPDATE_DATE: new Date(),
                             UPDATE_BY: 'admin',
                             UPDATE_NAME: '管理员'
                         }
                     }).then(function (res) {
-                        if (vm.checked == 1) {
-                            vm.pages.map(function (page) {
-                                if (page.ID == res.data.ID) {
-                                    page = res.data;
-                                }
-                            });
-                        }
-                        else {
-                            vm.pages.push(res.data);
-                        }
+                        $('#tb_pages').bootstrapTable('refresh', {silent: true});
                     })
 
                 }, function () {
@@ -102,35 +69,126 @@
 
             };
 
-            $scope.delete = function () {
-                var ids = [];
+            var _delete = function () {
+                var selects = $('#tb_pages').bootstrapTable('getSelections');
+                var ids = _.map(selects, 'ID');
 
-                vm.pages.map(function (page) {
-                    if (page.checked) {
-                        ids.push(page.ID);
-                    }
-                });
-
-                kpiService.post('http://localhost:3010/api/kpiPages/delete', {
+                kpiService.post(host + 'api/kpiPages/delete', {
                     ids: ids
-                }).then(function () {
-                    reload();
+                }).then(function (res) {
+                    $('#tb_pages').bootstrapTable('refresh', {silent: true});
                 })
             };
 
-            var reload = function () {
-                kpiService.get('http://localhost:3010/api/kpiPages').then(function (res) {
-                    vm.pages = res.data;
-                    vm.pages.map(function (page) {
-                        page.checked = false;
+            var TableInit = function () {
+                var oTableInit = {};
+                //初始化Table
+                oTableInit.Init = function () {
+                    $('#tb_pages').bootstrapTable({
+                        url: host + 'api/kpiPages',        //请求后台的URL（*）
+                        method: 'get',                      //请求方式（*）
+                        toolbar: '#toolbar',                //工具按钮用哪个容器
+                        striped: true,                      //是否显示行间隔色
+                        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                        pagination: true,                   //是否显示分页（*）
+                        sortable: false,                    //是否启用排序
+                        sortOrder: "asc",                   //排序方式
+                        queryParams: oTableInit.queryParams,//传递参数（*）
+                        // sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                        pageNumber: 1,                      //初始化加载第一页，默认第一页
+                        pageSize: 10,                       //每页的记录行数（*）
+                        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                        search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                        strictSearch: true,
+                        showColumns: true,                  //是否显示所有的列
+                        showRefresh: true,                  //是否显示刷新按钮
+                        minimumCountColumns: 2,             //最少允许的列数
+                        clickToSelect: true,                //是否启用点击选中行
+                        height: 505,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                        uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                        showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+                        cardView: false,                    //是否显示详细视图
+                        detailView: false,                  //是否显示父子表
+                        columns: [{
+                            checkbox: true
+                        }, {
+                            field: 'ID',
+                            title: '#'
+                        }, {
+                            field: 'TITLE',
+                            title: '标题'
+                        }, {
+                            field: 'IS_SHOW',
+                            title: '显示'
+                        }, {
+                            field: 'SHOW_INDEX',
+                            title: '排序'
+                        }, {
+                            field: 'CREATE_DATE',
+                            title: '创建时间'
+                        }, {
+                            field: 'CREATE_NAME',
+                            title: '创建者'
+                        }, {
+                            field: 'UPDATE_DATE',
+                            title: '更新时间'
+                        }, {
+                            field: 'UPDATE_NAME',
+                            title: '更新者'
+                        }],
+                        onCheck: function () {
+                            vm.checked++;
+                        },
+                        onUncheck: function () {
+                            vm.checked--;
+                        }
                     });
+                };
 
-                    vm.checkAll = false;
-                    vm.checked = 0;
-                })
+                //得到查询的参数
+                oTableInit.queryParams = function (params) {
+                    var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                        limit: params.limit,   //页面大小
+                        offset: params.offset,  //页码
+                        departmentname: $("#txt_search_departmentname").val(),
+                        statu: $("#txt_search_statu").val()
+                    };
+                    return temp;
+                };
+
+                return oTableInit;
             };
 
-            reload();
+            var ButtonInit = function () {
+                var oButton = {};
+                oButton.Init = function () {
+
+                    // JQuery failed to bind click function
+                    var btn_create = document.getElementById('btn_create');
+                    btn_create.onclick = create;
+
+                    var btn_edit = document.getElementById('btn_edit');
+                    btn_edit.onclick = edit;
+
+                    var btn_delete = document.getElementById('btn_delete');
+                    btn_delete.onclick = _delete;
+
+                };
+                return oButton;
+            };
+
+            var init = function () {
+
+                // 1.初始化Table
+                var oTable = new TableInit();
+                oTable.Init();
+
+                // 2.初始化Button的点击事件
+                var oButtonInit = new ButtonInit();
+                oButtonInit.Init();
+            };
+
+            init();
         })
 
         .controller('ModalInstanceCtrl', function ($uibModalInstance, $scope, newPage) {
