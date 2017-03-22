@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('KPIApp.controllers')
-        .controller('HomeController', function ($scope, $state, $timeout) {
+        .controller('HomeController', function ($scope) {
 
         })
 }());

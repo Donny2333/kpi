@@ -6,7 +6,7 @@
 
     angular.module('KPIApp', [
         'ui.bootstrap',
-        'KPI.Directives',
+        'KPI.directives',
         'KPIApp.services',
         'KPIApp.controllers'
     ]);

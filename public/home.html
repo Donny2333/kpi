@@ -16,12 +16,22 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" ng-app="KPIApp" ng-controller="HomeController">
 <div class="wrapper wrapper-content animated fadeInRight">
-    主页
+    <page-table></page-table>
 </div>
 <script src="lib/jquery.min.js?v=2.1.4"></script>
 <script src="lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers/AppController.js"></script>
+<script src="js/controllers/HomeController.js"></script>
 </body>
 
 </html>
