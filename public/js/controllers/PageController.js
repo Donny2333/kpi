@@ -20,7 +20,7 @@
             };
 
             var edit = function () {
-                if (vm.checked == 1) {
+                if (vm.checked === 1) {
                     var selects = $('#tb_pages').bootstrapTable('getSelections');
                     $scope.open(selects[0]);
                 }
