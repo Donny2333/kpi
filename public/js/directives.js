@@ -9,7 +9,7 @@
 
             return {
                 restrict: 'E',
-                templateUrl: '/page-table.html',
+                templateUrl: '../tpls/page-table.html',
                 replace: true,
                 transclude: true,
                 scope: {

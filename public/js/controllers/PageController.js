@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('KPIApp.controllers')
-        .controller('PageController', function (kpiService, $scope, $uibModal, $log, uuid, host) {
+        .controller('PageController', function (kpiService, $scope, $q, $uibModal, $log, uuid, host) {
             var vm = $scope.vm = {
                 table: {}
             };
