@@ -94,5 +94,10 @@
 
             return uuid;
         })
+        .factory('host', function () {
+            var host = 'http://localhost:3010/';
+
+            return host;
+        })
 
 }());

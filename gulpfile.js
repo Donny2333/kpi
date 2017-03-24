@@ -57,7 +57,7 @@ gulp.task('bs-reload', function () {
 gulp.task('css', function () {
     return gulp.src('public/**/*.css')
         .pipe(browserSync.reload({stream: true}));
-})
+});
 
 gulp.task('default', ['browser-sync'], function () {
     gulp.watch('public/**/*.js', ['js', browserSync.reload]);
