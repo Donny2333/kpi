@@ -1,0 +1,10 @@
+<ul dnd-list="list">
+    <li ng-repeat="item in list"
+        dnd-draggable="item"
+        dnd-effect-allowed="move"
+        dnd-moved="list.splice($index, 1)"
+        dnd-selected="vm.selected = item"
+        ng-class="{selected: vm.selected === item}"
+        ng-include="'tpls/' + item.category + '.html'">
+    </li>
+</ul>

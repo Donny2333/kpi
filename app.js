@@ -34,8 +34,9 @@ app.all('*', function (req, res, next) {
 });
 
 app.use('/api/kpiPages', kpiPages);
-app.get('/kpiPages', function (req, res) {
-    res.sendfile('./views/index.html');
+app.get('/kpiPages/:id', function (req, res) {
+    var id = req.params.id;
+    res.render('index.html', {ID: id});
 });
 
 // io.on('connection', function (socket) {

@@ -1,0 +1,72 @@
+[
+  {
+    "category": "container",
+    "id": 1,
+    "divide": "8:4",
+    "columns": [
+      [
+        {
+          "category": "item",
+          "type": "map",
+          "id": 2,
+          "title": "贫困人口分布图",
+          "dataSource": "json/data4.json",
+          "style": {
+            "height": "350px",
+            "width": "100%",
+            "float": "none"
+          }
+        }
+      ],
+      [
+        {
+          "category": "item",
+          "type": "gauge",
+          "id": 0,
+          "title": "脱贫比例",
+          "dataSource": "json/data5.json",
+          "style": {
+            "height": "350px",
+            "width": "100%",
+            "float": "none"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "category": "container",
+    "id": 3,
+    "divide": "6:6",
+    "columns": [
+      [
+        {
+          "category": "item",
+          "type": "bar",
+          "id": 5,
+          "title": "各乡镇扶贫情况",
+          "dataSource": "json/data2.json",
+          "style": {
+            "height": "200px",
+            "width": "100%",
+            "float": "none"
+          }
+        }
+      ],
+      [
+        {
+          "category": "item",
+          "type": "bar",
+          "id": 6,
+          "title": "资金流出情况",
+          "dataSource": "json/data1.json",
+          "style": {
+            "height": "200px",
+            "width": "100%",
+            "float": "none"
+          }
+        }
+      ]
+    ]
+  }
+]

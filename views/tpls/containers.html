@@ -1,0 +1,9 @@
+<ul class="box box-flex">
+    <li ng-repeat="item in vm.templates | filter: {category: 'container'}"
+        dnd-draggable="item"
+        dnd-effect-allowed="copy"
+        dnd-copied="item.id=item.id=item.id+7">
+        <img ng-src="{{item.image}}">
+        <span>{{item.name}}</span>
+    </li>
+</ul>
