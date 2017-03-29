@@ -85,8 +85,8 @@
                                     return '<a class="jump"><i class="glyphicon glyphicon-new-window"></i></a>'
                                 },
                                 events: {
-                                    'click .jump': function () {
-                                        $window.open('/kpiPages', '_blank');
+                                    'click .jump': function (e, value, row, index) {
+                                        $window.open('/kpiPages/' + row.ID, '_blank');
                                     }
                                 }
                             }
