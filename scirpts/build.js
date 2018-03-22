@@ -1,8 +1,8 @@
 /**
  * Created by Donny on 17/3/15.
  */
-var Users = require('../models/users');
-var KpiPages = require('../models/kpiPages');
+var Users = require('../models/users')
+var KpiPages = require('../models/kpiPages')
 
 // Users.sync({force: false}).then(function () {
 //     Users.create({

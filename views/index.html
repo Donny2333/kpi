@@ -1,79 +1,152 @@
 <!DOCTYPE html>
-<html ng-app="KPIApp">
+<html>
+
 <head>
-    <title>www</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/nested.css">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <title>主页</title>
 
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/lodash.min.js"></script>
-    <script src="lib/echarts.min.js"></script>
-    <script src="lib/angular-drag-and-drop-lists.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers/AppController.js"></script>
+  <!--[if lt IE 9]>
+  <meta http-equiv="refresh" content="0;ie.html"/>
+  <![endif]-->
 
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+  <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet">
+  <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
-<body ng-controller="AppController">
-<div class="head">
-    <ul class="nav nav-tabs">
-        <li ng-repeat="dock in vm.docks" ng-class="{active: vm.check===dock.id}">
-            <a href="#" ng-click="check(dock.id)">{{dock.name}}</a>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+  <!--左侧导航开始-->
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i>
+    </div>
+    <div class="sidebar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <span><img alt="image" class="img-circle" src="img/profile_small.jpg"/></span>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+                            <span class="clear"><span class="block m-t-xs">
+                                <strong class="font-bold">Beaut-zihan</strong></span><span
+                              class="text-muted text-xs block">超级管理员<b
+                              class="caret"></b></span></span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+              <li><a class="J_menuItem" href="javascript:;">修改头像</a></li>
+              <li><a class="J_menuItem" href="javascript:;">个人资料</a></li>
+              <li><a class="J_menuItem" href="javascript:;">联系我们</a></li>
+              <li><a class="J_menuItem" href="javascript:;">信箱</a></li>
+              <li class="divider"></li>
+              <li><a href="javascript:;">安全退出</a></li>
+            </ul>
+          </div>
+          <div class="logo-element">H+</div>
         </li>
-    </ul>
-    <div class="dock">
-        <div ng-include="vm.docks[vm.check].template"></div>
-        <div class="terminal">
-            <button class="btn btn-default">预览</button>
-            <button class="btn btn-default">保存</button>
-        </div>
+        <li>
+          <a class="J_menuItem" href="tpls/pages.html">
+            <i class="fa fa-bookmark"></i>
+            <span class="nav-label">页面管理</span>
+          </a>
+        </li>
+        <li>
+          <a class="J_menuItem" href="tpls/users.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-label">用户管理</span>
+          </a>
+        </li>
+        <li>
+          <a class="J_menuItem" href="tpls/rights.html">
+            <i class="fa fa-lock"></i>
+            <span class="nav-label">权限管理</span>
+          </a>
+        </li>
+        <li>
+          <a class="J_menuItem" href="tpls/manage.html">
+            <i class="fa fa-bullhorn"></i>
+            <span class="nav-label">服务管理</span>
+          </a>
+        </li>
+        <li>
+          <a class="J_menuItem" href="tpls/publish.html">
+            <i class="fa fa-cog"></i>
+            <span class="nav-label">服务发布</span>
+          </a>
+        </li>
+      </ul>
     </div>
-</div>
-<div class="main">
-    <div class="desk">
-        <div class="dropzone" ng-repeat="(zone, list) in vm.dropzones">
-            <div ng-include="'tpls/list.html'"></div>
+  </nav>
+  <!--左侧导航结束-->
+  <!--右侧部分开始-->
+  <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="row border-bottom">
+      <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+          class="fa fa-bars"></i> </a>
+          <form role="search" class="navbar-form-custom" method="post"
+                action="http://www.zi-han.net/theme/hplus/search_results.html">
+            <div class="form-group">
+              <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
+                     id="top-search">
+            </div>
+          </form>
         </div>
-    </div>
-    <div class="state">
-        <ul>
-            <li>
-                <span>种类</span>
-                <input type="text" ng-model="vm.selected.category" disabled>
-            </li>
-            <li>
-                <span>高度</span>
-                <input type="text" ng-model="vm.selected.style.height" ng-model-options="{ debounce: 1000 }">
-            </li>
-            <li>
-                <span>宽度</span>
-                <input type="text" ng-model="vm.selected.style.width" ng-model-options="{ debounce: 1000 }">
-            </li>
-            <li>
-                <span>标题</span>
-                <input type="text" ng-model="vm.selected.title" ng-model-options="{ debounce: 1000 }">
-            </li>
-            <li>
-                <span>类型</span>
-                <input type="text" ng-model="vm.selected.type" disabled>
-            </li>
-            <li>
-                <span>数据源</span>
-                <select ng-model="vm.selected.dataSource" ng-change="changeDataSource()">
-                    <option value="json/data1.json">data1.json</option>
-                    <option value="json/data2.json">data2.json</option>
-                    <option value="json/data3.json">data3.json</option>
-                    <option value="json/data4.json">data4.json</option>
-                    <option value="json/data5.json">data5.json</option>
-                </select>
-            </li>
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="dropdown hidden-xs">
+            <a class="right-sidebar-toggle" aria-expanded="false">
+              <i class="fa fa-tasks"></i> 反馈
+            </a>
+          </li>
         </ul>
-        <div class="trashcan box" dnd-list="[]" ng-class="{'selected': vm.selected.id != null}"></div>
+      </nav>
     </div>
+    <div class="row content-tabs">
+      <nav class="page-tabs J_menuTabs">
+        <div class="page-tabs-content">
+          <a href="javascript:;" class="active J_menuTab" data-id="home.html">首页</a>
+        </div>
+      </nav>
+      <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+      <div class="btn-group roll-nav roll-right">
+        <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+        </button>
+        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+          <li class="J_tabShowActive"><a>定位当前选项卡</a>
+          </li>
+          <li class="divider"></li>
+          <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+          </li>
+          <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+          </li>
+        </ul>
+      </div>
+      <a href="javascript:;" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+    </div>
+    <div class="row J_mainContent" id="content-main">
+      <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="tpls/home.html"
+              frameborder="0" data-id="home.html" seamless></iframe>
+    </div>
+    <div class="footer">
+      <div class="pull-right">&copy; 2016-2017 <a href="javascript:;" target="_blank">Donny's Blog</a>
+      </div>
+    </div>
+  </div>
+  <!--右侧部分结束-->
 </div>
+<script src="lib/jquery.min.js?v=2.1.4"></script>
+<script src="lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="lib/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="lib/plugins/layer/layer.min.js"></script>
+<script src="lib/plugins/pace/pace.min.js"></script>
+<script src="lib/hplus.min.js?v=4.1.0"></script>
+<script src="lib/contabs.min.js"></script>
+
 </body>
+
 </html>

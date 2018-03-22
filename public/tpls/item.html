@@ -1,0 +1,10 @@
+<div class="item">
+  <div class="ibox-title">
+    <span>{{item.title}}</span>
+  </div>
+  <div class="ibox-content">
+    <kpi-chart data="item.data" user-style="{'height':item.style.height,'width':item.style.width}"></kpi-chart>
+  </div>
+  <i ng-click="$event.stopPropagation();list.splice($index, 1);vm.selected={};" class="icon-x"
+     ng-if="item === vm.selected"></i>
+</div>

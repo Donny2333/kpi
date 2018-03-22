@@ -1,7 +1,0 @@
-<div class="container-element box">
-    <div class="column" ng-style="{width: (item.divide.split(':')[$index]/12*100).toFixed(2)+'%'}"
-         ng-repeat="list in item.columns" ng-include="'tpls/list.html'"></div>
-    <i ng-click="$event.stopPropagation();list.splice($index, 1);vm.selected={};" class="icon-x"
-       ng-if="item === vm.selected"></i>
-    <div class="clearfix"></div>
-</div>

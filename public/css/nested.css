@@ -1,0 +1,197 @@
+/***************************** Dock Styling *****************************/
+.box {
+  height: 100%;
+  margin: 0;
+  padding: 18px;
+}
+
+.box > h3 {
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.box-flex {
+  display: flex;
+}
+
+.box-flex > li {
+  display: flex;
+  margin: 0 20px 0 0;
+  height: 100%;
+  width: 130px;
+  border: 1px solid #bdc6d5;
+  background-color: #f8fbff;
+  list-style: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-flex > li:hover,
+.box-flex > li:active {
+  border: 1px solid #6797d8;
+}
+
+.box-flex > li:last-child {
+  margin-right: 0;
+}
+
+.box-flex > li > span {
+  color: #596477;
+}
+
+/***************************** Dropzone Styling *****************************/
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.dropzone ul[dnd-list] {
+  margin: 0;
+  min-height: 42px;
+  padding: 0;
+}
+
+.dropzone li {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.dropzone li:last-child {
+  margin-bottom: 0;
+}
+
+/**
+ * Reduce opacity of elements during the drag operation. This allows the user
+ * to see where he is dropping his element, even if the element is huge. The
+ * .dndDragging class is automatically set during the drag operation.
+ */
+.dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+/**
+ * The dndDraggingSource class will be applied to the source element of a drag
+ * operation. It makes sense to hide it to give the user the feeling that he's
+ * actually moving it. Note that the source element has also .dndDragging class.
+ */
+.dropzone .dndDraggingSource {
+  display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be added as child of the dnd-list
+ * while the user is dragging over it.
+ */
+.dropzone .dndPlaceholder {
+  background-color: #ddd;
+  display: block;
+  min-height: 42px;
+}
+
+/***************************** Element Selection *****************************/
+
+.dropzone .selected .item {
+  color: #6797d8;
+  border-color: #6797d8;
+}
+
+.dropzone .selected .box {
+  border-color: #6797d8;
+}
+
+.dropzone .selected .box > h3 {
+  background-color: #dff0d8;
+  background-image: linear-gradient(to bottom, #dff0d8 0, #d0e9c6 100%);
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+/***************************** Element type specific styles *****************************/
+
+.dropzone .item {
+  position: relative;
+  padding: 10px 15px;
+  border: 1px solid #bdc6d5;
+  background-color: #fff;
+}
+
+.dropzone .container-element {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+}
+
+.dropzone .container-element .column {
+  float: left;
+}
+
+.dropzone .icon-x {
+  position: absolute;
+  font-style: normal;
+  top: -10px;
+  right: -10px;
+  z-index: 100;
+  width: 20px;
+  height: 20px;
+  background: #bfbfbf;
+  border-radius: 10px;
+}
+
+.dropzone .icon-x:hover {
+  background-color: #00b3ee;
+}
+
+.dropzone .icon-x:active {
+  background-color: #2b579a;
+}
+
+.dropzone .icon-x:after {
+  display: block;
+  margin-top: -1px;
+  text-align: center;
+  padding: 0 5px;
+  color: white;
+  content: "x";
+}
+
+/***************************** Toolbox *****************************/
+
+.toolbox ul {
+  cursor: move;
+  list-style: none;
+  padding-left: 0;
+}
+
+.toolbox button {
+  margin: 5px;
+  opacity: 1.0;
+  width: 120px;
+}
+
+.toolbox .dndDragging {
+  opacity: 0.5;
+}
+
+.toolbox .dndDraggingSource {
+  opacity: 1.0;
+}
+
+/***************************** Trashcan *****************************/
+
+.trashcan {
+  height: 80px;
+  margin: 500px 0;
+  border-top: 1px solid black;
+  background: url('../images/trashcan_gray.png') no-repeat center center;
+  list-style: none;
+}
+
+.trashcan.selected {
+  background: url('../images/trashcan_red.png') no-repeat center center;
+}

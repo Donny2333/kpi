@@ -1,16 +1,16 @@
 /**
  * Created by Donny on 17/3/15.
  */
-var express = require('express');
-var kpiPages = require('../controller/kpiPages');
+var express = require('express')
+var kpiPages = require('../controller/kpiPages')
 
-var pages = kpiPages();
-var router = express.Router();
+var pages = kpiPages()
+var router = express.Router()
 
 router.get('/', pages.list)
-    .post('/', pages.insertOrUpdate);
+  .post('/', pages.insertOrUpdate)
 
 router.get('/:id', pages.getOne)
-    .post('/delete', pages.delete);
+  .post('/delete', pages.delete)
 
-module.exports = router;
+module.exports = router
