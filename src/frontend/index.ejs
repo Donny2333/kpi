@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="KPIApp">
+
+<head>
+  <title>www</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>
+
+<body ng-controller="AppController">
+  <div class="head">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="dock in vm.docks" ng-class="{active: vm.check===dock.id}">
+        <a href="#" ng-click="check(dock.id)">{{dock.name}}</a>
+      </li>
+    </ul>
+    <div class="dock">
+      <div ng-include="vm.docks[vm.check].template"></div>
+      <div class="terminal">
+        <button class="btn btn-default">预览</button>
+        <button class="btn btn-default">保存</button>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="desk">
+      <div class="dropzone" ng-repeat="(zone, list) in vm.dropzones">
+        <div ng-include="require('tpls/list.html')"></div>
+      </div>
+    </div>
+    <div class="state">
+      <ul>
+        <li>
+          <span>种类</span>
+          <input type="text" ng-model="vm.selected.category" disabled>
+        </li>
+        <li>
+          <span>高度</span>
+          <input type="text" ng-model="vm.selected.style.height" ng-model-options="{ debounce: 1000 }">
+        </li>
+        <li>
+          <span>宽度</span>
+          <input type="text" ng-model="vm.selected.style.width" ng-model-options="{ debounce: 1000 }">
+        </li>
+        <li>
+          <span>标题</span>
+          <input type="text" ng-model="vm.selected.title" ng-model-options="{ debounce: 1000 }">
+        </li>
+        <li>
+          <span>类型</span>
+          <input type="text" ng-model="vm.selected.type" disabled>
+        </li>
+        <li>
+          <span>数据源</span>
+          <select ng-model="vm.selected.dataSource" ng-change="changeDataSource()">
+            <option value="json/data1.json">data1.json</option>
+            <option value="json/data2.json">data2.json</option>
+            <option value="json/data3.json">data3.json</option>
+            <option value="json/data4.json">data4.json</option>
+            <option value="json/data5.json">data5.json</option>
+          </select>
+        </li>
+      </ul>
+      <div class="trashcan box" dnd-list="[]" ng-class="{'selected': vm.selected.id != null}"></div>
+    </div>
+  </div>
+</body>
+
+</html>
