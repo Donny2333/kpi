@@ -16,12 +16,12 @@ export default angular
         {
           id: 0,
           name: '容器',
-          template: require('../tpls/containers.html')
+          template: './tpls/containers.html'
         },
         {
           id: 1,
           name: '组件',
-          template: require('../tpls/items.html')
+          template: './tpls/items.html'
         }
       ],
       templates: [
