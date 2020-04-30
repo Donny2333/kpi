@@ -51,7 +51,7 @@
  */
 .dropzone ul[dnd-list] {
   margin: 0;
-  min-height: 42px;
+  min-height: 240px;
   padding: 0;
 }
 
@@ -91,7 +91,7 @@
 .dropzone .dndPlaceholder {
   background-color: #ddd;
   display: block;
-  min-height: 42px;
+  min-height: 240px;
 }
 
 /***************************** Element Selection *****************************/
